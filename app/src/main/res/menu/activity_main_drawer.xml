@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="HOME" />
+        <item
+            android:id="@+id/nav_networksView"
+            android:icon="@drawable/icon_networks"
+            android:title="Networks View"
+            app:actionLayout="@layout/layout_switch"/>
+        <item
+            android:id="@+id/nav_payment"
+            android:icon="@drawable/icon_payment_pressed"
+            android:title="Payment" />
+        <item
+            android:id="@+id/nav_jobHistory"
+            android:icon="@drawable/icon_job_normal"
+            android:title="Job History" />
+        <item
+            android:id="@+id/nav_emergencyContacts"
+            android:icon="@drawable/icon_emergency_normal"
+            android:title="Emergency Contacts" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/icon_help_normal"
+            android:title="Help" />
+        <item
+            android:id="@+id/nav_logOut"
+            android:icon="@drawable/icon_logout_normal"
+            android:title="Logout" />
+    </group>
+
+    <group>
+    <item android:title="Support via Call/Email" >
+        <!--app:actionLayout="@layout/layout_horizontal"-->
+        <menu >
+            <item
+                android:id="@+id/nav_supportCall"
+                android:icon="@drawable/call_icon_pressed"
+                android:title=""
+                />
+            <!--<item-->
+                <!--android:id="@+id/nav_supportMessage"-->
+                <!--android:icon="@drawable/icon_support_msg_pressed"-->
+                <!--android:title="Email"-->
+                <!--/>-->
+        </menu>
+    </item>
+    </group>
+
+</menu>
