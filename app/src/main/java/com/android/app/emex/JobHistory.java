@@ -9,26 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.Toast;
+import layout.RealJobHistory;
+import layout.RealMissedJobs;
 
-import layout.realJobHistory;
-import layout.realMissedJobs;
-
-
+/**
+ * takes care of job history section of Driver.
+ */
 public class JobHistory extends Fragment {
 
-
+    /**
+     * Required empty public constructor
+     */
     public JobHistory() {
         // Required empty public constructor
     }
 
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                            final Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_job_history, container, false);
@@ -37,16 +36,14 @@ public class JobHistory extends Fragment {
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.replace2);
         btn1.setBackgroundResource(R.drawable.on);
 
-//       int x = viewPager.getCurrentItem();
-
 
         FragmentStatePagerAdapter fragmentStatePagerAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
-            public Fragment getItem(int position) {
-                if(position == 0){
-                    return new realJobHistory();
+            public Fragment getItem(final int position) {
+                if (position == 0) {
+                    return new RealJobHistory();
                 }
-                return new realMissedJobs();
+                return new RealMissedJobs();
             }
 
             @Override
@@ -57,10 +54,10 @@ public class JobHistory extends Fragment {
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 viewPager.setCurrentItem(0);
-            btn2.setBackgroundResource(R.drawable.download);
-            btn1.setBackgroundResource(R.drawable.on);
+                btn2.setBackgroundResource(R.drawable.download);
+                btn1.setBackgroundResource(R.drawable.on);
 
             }
 
@@ -68,7 +65,7 @@ public class JobHistory extends Fragment {
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 viewPager.setCurrentItem(1);
                 btn1.setBackgroundResource(R.drawable.download);
                 btn2.setBackgroundResource(R.drawable.on);
@@ -76,30 +73,30 @@ public class JobHistory extends Fragment {
 
         });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onPageSelected(int position) {
-                if( position ==  0)
-                {
+            public void onPageSelected(final int position) {
+                if (position == 0) {
                     btn2.setBackgroundResource(R.drawable.download);
                     btn1.setBackgroundResource(R.drawable.on);
-                } else{
+                } else {
                     btn1.setBackgroundResource(R.drawable.download);
                     btn2.setBackgroundResource(R.drawable.on);
                 }
             }
-            public void onPageScrollStateChanged(int state) {
+
+            public void onPageScrollStateChanged(final int state) {
 
             }
-        } );
+        });
 
         viewPager.setAdapter(fragmentStatePagerAdapter);
         return rootView;
-}
+    }
 }
 

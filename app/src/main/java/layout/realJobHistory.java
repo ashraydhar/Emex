@@ -12,17 +12,19 @@ import com.android.app.emex.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class realJobHistory extends Fragment {
+public class RealJobHistory extends Fragment {
 
-
-    public realJobHistory() {
+    /**
+     * displays jobs undertaken by driver.
+     */
+    public RealJobHistory() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                            final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView3 =  inflater.inflate(R.layout.fragment_real_job_history, container, false);
 

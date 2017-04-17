@@ -12,17 +12,19 @@ import com.android.app.emex.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class realMissedJobs extends Fragment {
+public class RealMissedJobs extends Fragment {
 
-
-    public realMissedJobs() {
+    /**
+     * displays jobs missed by driver.
+     */
+    public RealMissedJobs() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView4 = inflater.inflate(R.layout.fragment_real_missed_jobs, container, false);
 

@@ -16,15 +16,17 @@ import android.widget.TextView;
  */
 public class HomePage extends Fragment {
 
-
+    /**
+     * its just a required empty constructor for the fragment HomePage
+     */
     public HomePage() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                            final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         final View rootView = inflater.inflate(R.layout.fragment_home_page, container, false);
@@ -33,10 +35,10 @@ public class HomePage extends Fragment {
         TextView textView = (TextView) rootView.findViewById(R.id.dropMenu);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
 
-                ImageView obj1 =(ImageView) rootView.findViewById(R.id.imageView3);
+                ImageView obj1 = (ImageView) rootView.findViewById(R.id.imageView3);
                 obj1.setVisibility(View.VISIBLE);
 
                 FrameLayout obj2 = (FrameLayout) rootView.findViewById(R.id.frameLayout3);
@@ -57,7 +59,7 @@ public class HomePage extends Fragment {
         TextView text = (TextView) rootView.findViewById(R.id.invisible);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
                 ImageView obj1 = (ImageView) rootView.findViewById(R.id.imageView3);
                 obj1.setVisibility(View.INVISIBLE);

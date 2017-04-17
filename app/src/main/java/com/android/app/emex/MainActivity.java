@@ -1,10 +1,7 @@
 package com.android.app.emex;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,18 +11,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    HomePage homepage = new HomePage();
-    FragmentManager fragmentManager = getSupportFragmentManager();
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-    JobHistory jobhistory = new JobHistory();
-    FragmentManager fragmentManager1 = getSupportFragmentManager();
+/**
+ * This is the Navigation drawer activity with all fragments running in the window.
+ */
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+    private static final double LATITUDE_COORDINATES = 21.7679, LONGITUDE_COORDINATES = 78.8718;
+    private SupportMapFragment sMapFragment;
+    private GoogleMap mMap;
+    private HomePage homepage = new HomePage();
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+
+    private JobHistory jobhistory = new JobHistory();
+    private FragmentManager fragmentManager1 = getSupportFragmentManager();
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sMapFragment = SupportMapFragment.newInstance();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,6 +53,8 @@ public class MainActivity extends AppCompatActivity
 
 
         fragmentManager.beginTransaction().replace(R.id.replace, homepage).commit();
+
+        sMapFragment.getMapAsync(this);
     }
 
     @Override
@@ -55,14 +68,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -78,35 +91,56 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(final MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
 
-
+        if (sMapFragment.isAdded()) {
+            sFm.beginTransaction().hide(sMapFragment).commit();
+        }
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.replace, homepage).commit();
             setTitle("Home");
         } else if (id == R.id.nav_networksView) {
             setTitle("Networks View");
+            if (!sMapFragment.isAdded()) {
+                sFm.beginTransaction().add(R.id.replace, sMapFragment).commit();
+            } else {
+                sFm.beginTransaction().show(sMapFragment).commit();
+            }
+//            fragmentManager2.beginTransaction().replace(R.id.replace,networksView).commit();
+//            Intent intent = new Intent(this,NetworksView.class);
+//            startActivity(intent);
         } else if (id == R.id.nav_payment) {
             setTitle("Payment");
         } else if (id == R.id.nav_jobHistory) {
-            fragmentManager1.beginTransaction().replace(R.id.replace,jobhistory).commit();
+            fragmentManager1.beginTransaction().replace(R.id.replace, jobhistory).commit();
             setTitle("Job History");
 
         } else if (id == R.id.nav_emergencyContacts) {
             setTitle("Emergency Contacts");
         } else if (id == R.id.nav_help) {
             setTitle("Help");
+        } else if (id == R.id.nav_logOut) {
+            setTitle("Logging Out");
         }
-        else if (id == R.id.nav_logOut) {
-                
-        }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+        mMap = googleMap;
+
+
+        // Add a marker in Sydney and move the camera
+        LatLng india = new LatLng(LATITUDE_COORDINATES, LONGITUDE_COORDINATES);
+        mMap.addMarker(new MarkerOptions().position(india).title("Marker in India"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(india));
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/border">
+
+
+<TextView
+android:id="@+id/abc"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="    27th  august  2017                        5.6 Km"
+android:textColor="@color/colorPrimaryDark"
+android:textSize="18dp"
+android:layout_marginTop="10dp"/>
+
+<View
+android:id="@+id/def"
+android:layout_below="@id/abc"
+android:layout_width="match_parent"
+android:layout_height="1dp"
+android:background="#000"
+android:layout_marginTop="10dp"
+android:layout_marginLeft="15dp"
+android:layout_marginRight="15dp"/>
+
+
+<TextView
+android:id="@+id/ghi"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="3846 W 38 Rd, Shiv Srishti Marg Mumbai"
+android:layout_below="@id/def"
+android:layout_marginTop="10dp"
+android:layout_marginLeft="25dp"
+android:textSize="18sp"
+    />
+<TextView
+android:id="@+id/jkl"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Silver Oks Hospital, Laxmi Nagar,Mumbai"
+android:layout_below="@id/ghi"
+android:layout_marginTop="10dp"
+android:layout_marginLeft="25dp"
+android:textSize="18sp"/>
+<TextView
+android:id="@+id/mno"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Ride Time : 20 Min"
+android:layout_below="@id/jkl"
+android:layout_marginTop="10dp"
+android:layout_marginLeft="28dp"
+android:textSize="18sp"/>
+<View
+android:id="@+id/pqr"
+android:layout_below="@id/mno"
+android:layout_width="match_parent"
+android:layout_height="1dp"
+android:background="#000"
+android:layout_marginTop="10dp"
+android:layout_marginLeft="15dp"
+android:layout_marginRight="15dp"/>
+<TextView
+android:id="@+id/stu"
+android:layout_below="@id/pqr"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="    Total Payable Amount      ₹ 1832.00"
+android:textColor="@color/colorPrimaryDark"
+android:textSize="18sp"
+android:layout_marginTop="10dp"/>
+
+</RelativeLayout>
