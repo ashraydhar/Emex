@@ -1,5 +1,7 @@
 package com.android.app.emex;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -11,24 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * This is the Navigation drawer activity with all fragments running in the window.
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
-    private static final double LATITUDE_COORDINATES = 21.7679, LONGITUDE_COORDINATES = 78.8718;
-    private SupportMapFragment sMapFragment;
-    private GoogleMap mMap;
+        implements NavigationView.OnNavigationItemSelectedListener {
+    //    private SupportMapFragment sMapFragment;
+//    private GoogleMap mMap;
     private HomePage homepage = new HomePage();
     private FragmentManager fragmentManager = getSupportFragmentManager();
-
     private JobHistory jobhistory = new JobHistory();
     private FragmentManager fragmentManager1 = getSupportFragmentManager();
 
@@ -36,7 +30,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sMapFragment = SupportMapFragment.newInstance();
+//        sMapFragment = SupportMapFragment.newInstance();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,7 +48,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager.beginTransaction().replace(R.id.replace, homepage).commit();
 
-        sMapFragment.getMapAsync(this);
+//        sMapFragment.getMapAsync(this);
     }
 
     @Override
@@ -94,24 +88,21 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(final MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
-
-        if (sMapFragment.isAdded()) {
-            sFm.beginTransaction().hide(sMapFragment).commit();
-        }
+//        android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
+//
+//        if (sMapFragment.isAdded()) {
+//            sFm.beginTransaction().hide(sMapFragment).commit();
+//        }
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.replace, homepage).commit();
             setTitle("Home");
         } else if (id == R.id.nav_networksView) {
-            setTitle("Networks View");
-            if (!sMapFragment.isAdded()) {
-                sFm.beginTransaction().add(R.id.replace, sMapFragment).commit();
-            } else {
-                sFm.beginTransaction().show(sMapFragment).commit();
-            }
-//            fragmentManager2.beginTransaction().replace(R.id.replace,networksView).commit();
-//            Intent intent = new Intent(this,NetworksView.class);
-//            startActivity(intent);
+//            setTitle("Networks View");
+//            TextView textView = (TextView) findViewById(R.id.googleMap);
+//            textView.setVisibility(View.VISIBLE);
+//          fragmentManager2.beginTransaction().replace(R.id.replace,networksView).commit();
+            Intent intent = new Intent(this, ReadyMadeMapsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_payment) {
             setTitle("Payment");
         } else if (id == R.id.nav_jobHistory) {
@@ -133,14 +124,4 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onMapReady(final GoogleMap googleMap) {
-        mMap = googleMap;
-
-
-        // Add a marker in Sydney and move the camera
-        LatLng india = new LatLng(LATITUDE_COORDINATES, LONGITUDE_COORDINATES);
-        mMap.addMarker(new MarkerOptions().position(india).title("Marker in India"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(india));
-    }
 }
